@@ -24,13 +24,15 @@ The analysis covers the preprocessing of microBulk RNA-seq from FFPE samples, mo
 
 - Validation: Integration and GSEA comparison with Nicolle et al. and Linehan et al. datasets.
 
+
 ### 2. Getting Started
-**Prerequisites: **
+#### Prerequisites:
 
 You will need R (>= 4.0) and the following core Bioconductor packages:
 edgeR, Rsubread, clusterProfiler, org.Hs.eg.db, and singscore.
 
-**Installation: **
+
+#### Installation:
 
 Clone this repository:
 
@@ -38,16 +40,17 @@ Clone this repository:
 git clone https://github.com/Genomics-Consulting/Netris_LapNet.git
 ```
 
-Open **Netris_LapNet.Rproj** in RStudio.
+Open `Netris_LapNet.Rproj` in RStudio.
 
-Install dependencies:
+Restore the R environment using `renv`:
 
 ```r
 install.packages("renv")
 renv::restore() 
 ```
 
-**Molecular Subtyping Setup: **
+
+#### Molecular Subtyping Setup:
 
 1. First, create the base environment containing the R and Python dependencies:
 
@@ -61,7 +64,6 @@ From within the directory where you have cloned the PDACMOC repository, run:
 
 ```r
 # Inside an R session
-R
 # Install the ADVOCATE dependency required for stroma classification
 install.packages("inst/packages/ADVOCATE_0.1.0.tar.gz", repos = NULL, type = "source")
 
@@ -72,10 +74,11 @@ install.packages(".", repos = NULL, type = "source")
 Script 2_molecular_classification.R is configured to use the Python interpreter provided by the Conda environment:
 
 ```r
-reticulate::use_python("path/to/miniconda3/envs/PDACMOC/bin/python")
+reticulate::use_condaenv("PDACMOC")
 ```
 
-**External Data:**
+
+#### External Data:
 
 While data/pdata_LapNet.csv is included in this repo, the raw expression data and large objects should be downloaded from GEO:
 
@@ -83,20 +86,22 @@ While data/pdata_LapNet.csv is included in this repo, the raw expression data an
 
 - Public Data: GSE253260 (Nicolle et al.), GSE131050 (Linehan et al.), and GSE225691 (Cassier et al.).
 
+
 ### 3. Usage
 The analysis is divided into sequential scripts. Please run them in order:
 
-1. scripts/1_preprocessing.R: Alignment and initial QC.
+1. `scripts/1_preprocessing.R`: Alignment and initial QC.
 
-2. scripts/2_molecular_classification.R: Application of PDAC-specific classifiers.
+2. `scripts/2_molecular_classification.R`: Application of PDAC-specific classifiers.
 
-3. scripts/3_differential_Pro.vs.Pre.R: Identification of DEGs and GSEA.
+3. `scripts/3_differential_Pro.vs.Pre.R`: Identification of DEGs and GSEA.
 
-4. scripts/4_public_datasets.R: Processing and integration of validation cohorts.
+4. `scripts/4_public_datasets.R`: Processing and integration of validation cohorts.
 
-5. scripts/5_LapNet_pdata.R: Consolidation of metadata for final figures.
+5. `scripts/5_LapNet_pdata.R`: Consolidation of metadata for final figures.
 
-6. scripts/6_Figures.R: Generation of all main and extended figures.
+6. `scripts/6_Figures.R`: Generation of all main and extended figures.
+
 
 ### 4. Citation
 If you use this code or the LapNet dataset, please cite:
@@ -105,10 +110,10 @@ If you use this code or the LapNet dataset, please cite:
 
 ----
 
-<div style="text-align: center; padding: 20px; background-color: #ECF0F1; border-radius: 10px; margin-top: 40px;">
-*For questions or collaboration opportunities, please contact us at contact@genomicsconsulting.eu or check our [website](https://www.genomicsconsulting.eu/){target="_blank"}.*
+> #### 📧 Contact & Collaboration
+> For questions or collaboration opportunities, please contact us at **contact@genomicsconsulting.eu** or visit our [website](https://www.genomicsconsulting.eu/).
+>
+> **Genomics Consulting SARL** – 999 261 738 R.C.S. Lyon  
+> Registered Office: 36B rue de la Batterie, 69500 Bron, France
 
-Genomics Consulting SARL – 999 261 738 R.C.S. Lyon
-Registered Office: 36B rue de la Batterie, 69500 Bron, France
-
-</div>
+----
