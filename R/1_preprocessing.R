@@ -6,9 +6,6 @@
 # checked with fastQC + multiqc
 # trimmed with Trim-Galore!
 
-# Initial code based on:
-# https://bioconductor.org/packages/release/workflows/vignettes/RnaSeqGeneEdgeRQL/inst/doc/edgeRQL.html#read-alignment-and-quantification
-
 # considerations for microbulk + FFPE:
 # expect high level of duplicates and lower quality in fastQC
 # stringent trimming may be necessary
@@ -101,7 +98,7 @@ fc <- featureCounts(all.bam, annot.inbuilt="hg38",
                     countMultiMappingReads = F,
                     strandSpecific = 0, # checked options 1 and 2 with even less alignments
                     minMQS = 20, # default parameter is zero
-                    requireBothEndsMapped = T # increase stringency for FFPE samples
+                    requireBothEndsMapped = T # increased stringency for FFPE samples
 )
 head(fc$counts)
 

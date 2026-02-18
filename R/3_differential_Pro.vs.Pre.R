@@ -163,17 +163,17 @@ saveRDS(em2, paste0(out.dir, "GSEA_Hallmarks_Post.vs.Pre.rds"))
 load(file="data/LapNet/DGElist_all.RData")
 # keep only samples with paired Pre/Post tumor tissues
 y <- y[, y$samples$Structures=="Tumor", ]
-y <- y[, y$samples$ID_Lapnet%in%c("01-007","02-001","02-003","02-014")]
+y <- y[, y$samples$ID_paired%in%c("01-007","02-001","02-003","02-014")]
 dim(y) # 27773    8
 
 pdata <- y$samples
 head(pdata)
-table(pdata$ID_Lapnet, pdata$timepoint)
+table(pdata$ID_paired, pdata$timepoint)
 
 # Model
 pdata$timepoint <- as.factor(pdata$timepoint)
 pdata$timepoint <- relevel(pdata$timepoint, ref = "Pre")
-design <- model.matrix(~ID_Lapnet + timepoint, data = pdata)
+design <- model.matrix(~ID_paired + timepoint, data = pdata)
 ncol(design)
 head(design)
 

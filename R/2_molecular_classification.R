@@ -459,22 +459,11 @@ scored <- estimate_score(filtered,
                          is_affymetrix = TRUE)
 head(scored)
 plot_purity(scored, is_affymetrix = TRUE)
-ggsave(paste0(out.dir, "LapNet_ESTIMATE_purity_all.samples.png"), width=10, height=10)
-ggsave(paste0(out.dir, "LapNet_ESTIMATE_purity_all.samples.pdf"), width=10, height=10)
-
-pdata.tumor <- pdata[pdata$Structures=="Tumor", ]
-score.tumor <- scored[scored$sample %in% rownames(pdata.tumor), ]
-all(rownames(pdata.tumor)==score.tumor$sample) # TRUE
-score.tumor$sample <- pdata.tumor$ID_Lapnet
-options(ggrepel.max.overlaps = Inf)
-plot_purity(score.tumor, is_affymetrix = TRUE)
-ggsave(paste0(out.dir, "LapNet_ESTIMATE_purity_tumor.samples.png"), width=8, height=8)
-ggsave(paste0(out.dir, "LapNet_ESTIMATE_purity_tumor.samples.pdf"), width=8, height=8)
 
 pdata <- cbind(pdata, scored)
 
 y$samples <- pdata
-save(y, file=paste0(data.dir, "DGElist_all_v2.RData"))
+save(y, file=paste0(data.dir, "DGElist_all.RData"))
 
 write.csv(pdata, file = paste0(out.dir, "LapNet.all_molecular_classification.csv"), row.names = T)
 

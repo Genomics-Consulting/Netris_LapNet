@@ -427,7 +427,7 @@ head(pdata.Linehan)
 
 pdata.Lapnet$study <- "LapNet_seq"
 pdata.Lapnet$Treatment <- "FOLFIRINOX_NP137"
-pdata.Lapnet <- pdata.Lapnet[, c("Treatment","timepoint","ID_Lapnet","study")]
+pdata.Lapnet <- pdata.Lapnet[, c("Treatment","timepoint","ID_paired","study")]
 colnames(pdata.Lapnet) <- c("Treatment","Timepoint","Patient_ID", "Study")
 head(pdata.Lapnet)
 

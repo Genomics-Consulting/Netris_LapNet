@@ -111,7 +111,7 @@ names(response.colors) <- levels(as.factor(pdata$Response))
 pdata.pre <- pdata[pdata$timepoint=="Pre", ]
 pdata.pre2 <- pdata.pre[pdata.pre$Response != "PD", ] # remove PD sample
 paired_samples <- c("01-007","02-001","02-003","02-014")
-pdata.paired <- pdata[pdata$ID_Lapnet %in% paired_samples, ]
+pdata.paired <- pdata[pdata$ID_paired %in% paired_samples, ]
 
 pdata2 <- pdata[pdata$Response != "PD", ]
 pdata2$Response <- factor(pdata2$Response)
@@ -359,7 +359,7 @@ ggsave(paste0(out.dir, "LapNet_ESTIMATE_purity_all.samples.pdf"), width=10, heig
 pdata.tumor <- pdata_all[pdata_all$Structures=="Tumor", ]
 score.tumor <- scored[scored$sample %in% rownames(pdata.tumor), ]
 all(rownames(pdata.tumor)==score.tumor$sample) # TRUE
-score.tumor$sample <- pdata.tumor$ID_Lapnet
+score.tumor$sample <- pdata.tumor$ID_paired
 options(ggrepel.max.overlaps = Inf)
 plot_purity(score.tumor, is_affymetrix = TRUE)
 
@@ -391,7 +391,7 @@ sel.genes <- c(rev(na.omit(top$Symbol[top$logFC < 0])[1:6]),
 all(rownames(pdata)==colnames(logcpm))
 plot_data <- cbind(pdata, t(logcpm[sel.genes, ]))
 plot_data_facet <- plot_data %>%
-  select(timepoint, ID_Lapnet, all_of(sel.genes)) %>%
+  select(timepoint, ID_paired, all_of(sel.genes)) %>%
   pivot_longer(cols = all_of(sel.genes),
                names_to = "gene",
                values_to = "expression") %>%
