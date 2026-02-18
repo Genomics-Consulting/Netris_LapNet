@@ -1,6 +1,7 @@
 ![R Version](https://img.shields.io/badge/R-%3E%3D%204.3-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Reproducibility](https://img.shields.io/badge/reproducibility-renv-orange)
+[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.18677425-blue.svg)](https://doi.org/10.5281/zenodo.18677425)
 
 # Netris LapNet
 ### Transcriptomic Analysis of PDAC Tissues (LapNet Study)
