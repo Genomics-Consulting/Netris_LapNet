@@ -385,7 +385,7 @@ summary(purist.proportions)
 
 # update pdata ---------------------------------------------------------------
 
-load(file=paste0("data/LapNet/DGElist_all.RData"))
+load(file=paste0(data.dir, "DGElist_all.RData"))
 pdata <- y$samples
 head(pdata)
 counts <- y$counts
@@ -432,7 +432,7 @@ head(pdata)
 
 ## save updated pdata
 y$samples <- pdata
-save(y, file=paste0(data.dir, "/DGElist_all.RData"))
+save(y, file=paste0(data.dir, "DGElist_all.RData"))
 
 write.csv(pdata, file = paste0(out.dir, "LapNet.all_molecular_classification.csv"), row.names = T)
 

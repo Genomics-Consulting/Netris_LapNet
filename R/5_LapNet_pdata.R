@@ -30,7 +30,7 @@ data.dir <- "data/"
 # this is the complete version of the normalized dataset
 # with all metadata information
 # only tumor samples after removing stroma and bad quality sample
-load(file="data/LapNet/DGElist_norm.RData")
+load(file= paste0(data.dir, "DGElist_norm.RData"))
 dim(y) # 13889    28
 pdata <- y$samples
 head(pdata)
@@ -58,7 +58,7 @@ head(pdata)
 rankData <- rankGenes(logcpm)
 
 # get GSEA results
-gsea.results <- read.csv(file = paste0(out.dir, "GSEA_Hallmarks_Post.vs.Pre_v2.csv"), row.names = 1)
+gsea.results <- read.csv(file = paste0(out.dir, "GSEA_Hallmarks_Post.vs.Pre.csv"), row.names = 1)
 head(gsea.results)
 core.genes <- gsea.results["HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION", "core_enrichment"]
 core.genes <- unlist(strsplit(core.genes, "/"))

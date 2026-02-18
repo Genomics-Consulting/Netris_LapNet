@@ -83,7 +83,7 @@ reticulate::use_condaenv("PDACMOC")
 
 While data/pdata_LapNet.csv is included in this repo, the raw expression data and large objects should be downloaded from GEO:
 
-- LapNet Data: [GEO Accession XXXX]
+- LapNet Data: GEO Accession [GSE319924](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE319924)
 
 - Public Data: GSE253260 (Nicolle et al.), GSE131050 (Linehan et al.), and GSE225691 (Cassier et al.).
 

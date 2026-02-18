@@ -378,7 +378,7 @@ write.csv(pdata, file = paste0(out.dir, "Linehan_folfirinox_paired_metadata.csv"
 
 ## Integration -------------------------------------------------------------
 
-load(file=paste0("data/LapNet/DGElist_Linehan.all.RData"))
+load(file=paste0(data.dir, "DGElist_Linehan.all.RData"))
 Linehan <- y
 dim(Linehan)
 load(file=paste0(data.dir, "DGElist_all.RData")) # LapNet
@@ -397,9 +397,9 @@ table(pdata.Linehan$Pre.Post)
 
 pdata.Lapnet <- Lapnet$samples
 head(pdata.Lapnet)
-# remove stromal samples and sample with few reads (24N0 2454-06-006)
+# remove stromal samples and sample with few reads (S025T1R1)
 samples.to.remove <- pdata.Lapnet[pdata.Lapnet$Structures == "Stroma", ]
-samples.to.remove <- c(rownames(samples.to.remove), "06-006_Pre_Tumor")
+samples.to.remove <- c(rownames(samples.to.remove), "S025T1R1")
 Lapnet <- Lapnet[, -which(colnames(Lapnet) %in% samples.to.remove)]
 pdata.Lapnet <- Lapnet$samples
 head(pdata.Lapnet)

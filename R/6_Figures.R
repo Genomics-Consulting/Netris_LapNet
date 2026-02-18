@@ -66,7 +66,7 @@ data.dir <- "data/"
 ## datasets ----
 
 # Nicolle
-load(file="data/LapNet/DGElist_GSE253260_LAPC_full.pdata.RData")
+load(file= paste0(data.dir, "DGElist_GSE253260_LAPC_full.pdata.RData"))
 pdata_Nicolle <- y$samples
 head(pdata_Nicolle)
 rm(y)
@@ -110,7 +110,7 @@ names(response.colors) <- levels(as.factor(pdata$Response))
 
 pdata.pre <- pdata[pdata$timepoint=="Pre", ]
 pdata.pre2 <- pdata.pre[pdata.pre$Response != "PD", ] # remove PD sample
-paired_samples <- c("01-007","02-001","02-003","02-014")
+paired_samples <- c("S002","S009","S011","S013")
 pdata.paired <- pdata[pdata$ID_paired %in% paired_samples, ]
 
 pdata2 <- pdata[pdata$Response != "PD", ]
@@ -454,7 +454,7 @@ head(tumor)
 table(tumor$ID)
 tumor$ID <- as.factor(tumor$ID)
 
-gsea.results <- read.csv(file = paste0(out.dir, "/GSEA_Hallmarks_Post.vs.Pre_v2.csv"), row.names = 1)
+gsea.results <- read.csv(file = paste0(out.dir, "/GSEA_Hallmarks_Post.vs.Pre.csv"), row.names = 1)
 head(gsea.results)
 core.genes <- gsea.results["HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION", "core_enrichment"]
 core.genes <- unlist(strsplit(core.genes, "/"))

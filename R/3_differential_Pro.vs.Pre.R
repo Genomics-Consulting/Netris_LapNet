@@ -48,14 +48,14 @@ data.dir <- "data/"
 
 ## unpaired ----
 
-load(file="data/LapNet/DGElist_all.RData")
+load(file=paste0(data.dir, "DGElist_all.RData"))
 
 pdata <- y$samples
 head(pdata)
 
-# remove sample with few reads (24N0 2454-06-006)
+# remove sample with few reads (S025T1R1)
 samples.to.remove <- pdata[pdata$Structures == "Stroma", ]
-samples.to.remove <- c(rownames(samples.to.remove), "06-006_Pre_Tumor")
+samples.to.remove <- c(rownames(samples.to.remove), "S025T1R1")
 y <- y[, -which(colnames(y) %in% samples.to.remove)]
 dim(y) #  27773    28
 pdata <- y$samples
@@ -84,6 +84,13 @@ head(y$samples)
 plotBCV(y)
 
 save(y, file=paste0(data.dir, "DGElist_norm.RData"))
+
+# save raw counts for GEO
+logcpm <- cpm(y, log=TRUE, normalized.lib.sizes = TRUE)
+head(logcpm)
+rownames(logcpm) <- y$genes$Symbol
+write.csv(logcpm, file = paste0(data.dir, "normalized_counts_logcpm.csv"))
+
 
 # Differential expression
 load(file=paste0(data.dir, "DGElist_norm.RData"))
@@ -160,10 +167,10 @@ saveRDS(em2, paste0(out.dir, "GSEA_Hallmarks_Post.vs.Pre.rds"))
 
 ## paired ----
 
-load(file="data/LapNet/DGElist_all.RData")
+load(file=paste0(data.dir, "DGElist_all.RData"))
 # keep only samples with paired Pre/Post tumor tissues
 y <- y[, y$samples$Structures=="Tumor", ]
-y <- y[, y$samples$ID_paired%in%c("01-007","02-001","02-003","02-014")]
+y <- y[, y$samples$ID_paired%in%c("S002","S009","S011","S013")]
 dim(y) # 27773    8
 
 pdata <- y$samples

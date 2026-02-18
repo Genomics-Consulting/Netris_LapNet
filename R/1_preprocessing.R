@@ -122,7 +122,7 @@ rownames(stat) <- stat$Status
 stat <- stat[,-1]
 head(stat)
 
-prop.mapped <- read.csv("data/LapNet/prop.mapped.csv", row.names=NULL)
+prop.mapped <- read.csv(paste0(data.dir, "prop.mapped.csv"), row.names=NULL)
 prop.mapped$NumMapped <- prop.mapped$Mapped_fragments
 prop.mapped$NumTotal <- prop.mapped$Total_no.trimming
 head(prop.mapped)
@@ -140,7 +140,6 @@ p1 <- ggplot(prop.mapped) +
   geom_bar(aes(fill="Reads untrimmed", y=Total_fragments, x=sample), position="stack", stat="identity") +
   geom_bar(aes(fill="Reads mapped", y=NumMapped, x=sample), position="stack", stat="identity") +
   geom_bar(aes(fill="Reads assigned", y=Assigned, x=sample), position="stack", stat="identity") +
-  #  geom_point(aes(fill="Duplication", y=av_dups, x=rownames(prop.mapped))) + 
   scale_fill_brewer(palette = "Blues", direction = -1) +
   xlab("") + ylab("Number of reads") +
   ggtitle("Mapping QC - Number") +
@@ -154,7 +153,6 @@ p2 <- ggplot(prop.mapped) +
   geom_bar(aes(fill="Reads untrimmed", y=prop.untrimmed, x=sample), position="stack", stat="identity") +
   geom_bar(aes(fill="Reads mapped", y=prop, x=sample), position="stack", stat="identity") +
   geom_bar(aes(fill="Reads assigned", y=prop.assigned, x=sample), position="stack", stat="identity") +
-  #  geom_point(aes(fill="Duplication", y=av_dups, x=rownames(prop.mapped))) + 
   scale_fill_brewer(palette = "Blues", direction = -1) +
   xlab("") + ylab("Proportion of reads") +
   ggtitle("Mapping QC - Proportion") +
@@ -183,14 +181,10 @@ table(pdata$Structures)
 # Stroma  Tumor 
 #   6     30 
 
-rownames(pdata) <- pdata$bam.file
+rownames(pdata) <- pdata$ID
 pdata <- pdata[colnames(fc$counts), ]
 
-all(colnames(fc$counts) == pdata$bam.file)
-
-# change names
-rownames(pdata) <- pdata$R_name
-colnames(fc$counts) <- rownames(pdata)
+all(colnames(fc$counts) == pdata$ID)
 
 y <- DGEList(counts= fc$counts, samples = pdata)
 dim(y) # 28395    36
@@ -228,7 +222,7 @@ par(mar=c(10,5,5,5), mfrow=c(3,1))
 boxplot(logcpm, las = 2, ylab = "logcpm") # 
 barplot(colSums(counts), las = 2, main = "Read counts per sample")
 barplot(rowSums(counts), las = 2, main = "Read counts per feature")
-# bad QC sample X24N0_2454.06.006 has 1072 reads
+# bad QC sample S025T1R1 has 1072 reads
 # others range between 132548 and 12813357 reads 
 # about half of them have at least 1M reads
 
